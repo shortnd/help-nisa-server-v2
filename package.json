@@ -1,0 +1,25 @@
+{
+  "name": "help-nisa-server-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cuid": "^2.1.8",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5",
+    "slugify": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "node -r esm start.js",
+    "dev": "nodemon -r esm start.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
