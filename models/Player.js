@@ -1,11 +1,21 @@
 import cuid from 'cuid';
+import slugify from 'slugify'
 
 import db from '../db'
+
+export const PlayerDocument = {
+  _id: String,
+  name: String,
+  number: Number,
+  position: String,
+  photo: String,
+  slug: String
+}
 
 const PlayerSchema = new db.Schema({
   _id: {
     type: String,
-    default: cuid()
+    default: cuid
   },
   name: {
     type: String,
@@ -15,13 +25,14 @@ const PlayerSchema = new db.Schema({
   number: {
     type: Number,
     min: 0,
-    max: 255
+    max: 255,
   },
   position: {
     type: String,
     index: true,
+    required: true,
     default: 'forward',
-    emum: [
+    enum: [
       "forward",
       "defender",
       "midfielder",
@@ -34,17 +45,19 @@ const PlayerSchema = new db.Schema({
     ]
   },
   photo: {
+    type: String
   },
-  team: {
-    type: String,
-    ref: 'Team',
-    index: true,
-    required: true
-  },
+  // team: {
+  //   type: String,
+  //   ref: 'Team',
+  //   index: true,
+  //   required: true
+  // },
   slug: {
     type: String,
-    unqiue: true,
-    index: true
+    unique: true,
+    index: true,
+    lowercase: true
   }
 })
 
@@ -54,11 +67,12 @@ PlayerSchema.pre('save', async function(next) {
   }
   this.slug = slugify(this.name.toLowerCase());
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
-  const playersWithSlug = await this.contrustor.find({ slug: slugRegEx })
+  const playersWithSlug = await this.constructor.find({ slug: slugRegEx })
+  console.log(playersWithSlug)
   if (playersWithSlug.length) {
-    this.slug = `${this.slug}-${this.playersWithSlug.length + 1}`
+    this.slug = `${this.slug}-${playersWithSlug.length + 1}`
   }
   next();
 });
 
-const Player = db.model('Player', PlayerSchema)
+export const Player = db.model('Player', PlayerSchema)
