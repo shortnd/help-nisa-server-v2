@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
 import jwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
 
+dotenv.config();
+
 const authConfig = {
-  domain: "nisa-helper.auth0.com",
-  audience: "https://nisa-helper-server.herokuapp.com/"
+  domain: `${process.env.AUTH0_DOMAIN}`,
+  audience: `${process.env.AUTH0_ISSUER}`
 };
 
 const checkJwt = jwt({
@@ -13,7 +16,7 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
   }),
-  audience: authConfig.audience,
+  audience: `https://${authConfig.audience}`,
   issuer: `https://${authConfig.domain}/`,
   algorithm: ["RS256"]
 });

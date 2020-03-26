@@ -33,26 +33,25 @@ const PlayerSchema = new db.Schema({
     required: true,
     default: 'forward',
     enum: [
-      "forward",
-      "defender",
-      "midfielder",
-      "goalkeeper",
-      "head coach",
-      "assistant coach",
-      "goalkeeper coach",
-      "technical director",
-      "associate head_coach"
+      "Forward",
+      "Defender",
+      "Midfielder",
+      "Goalkeeper",
+      "Head Coach",
+      "Assistant Coach",
+      "Goalkeeper Coach",
+      "Technical Director",
+      "Associate Head Coach"
     ]
   },
   photo: {
     type: String
   },
-  // team: {
-  //   type: String,
-  //   ref: 'Team',
-  //   index: true,
-  //   required: true
-  // },
+  team: {
+    type: String,
+    ref: 'Team',
+    index: true,
+  },
   slug: {
     type: String,
     unique: true,

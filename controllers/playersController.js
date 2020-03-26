@@ -8,7 +8,7 @@ import { autoCatch } from '../helpers/auto-catch';
  *
  * @return {Promise<[PlayerDocument]>}
  */
-export const allPlayers = async (req, res) => {
+const allPlayers = async (req, res) => {
   const { offset = 0, limit = 25 } = req.query;
   const players = await Player.find()
     .skip(Number(offset))
@@ -47,8 +47,12 @@ const showPlayer = async (req, res) => {
  */
 const updatePlayer = async (req, res) => {
   const player = await Player.findById(req.params.playerId);
-  const changes = await Object.assign(player, req.body)
-  return res.status(200).json(changes)
+  const changes = req.body;
+  Object.keys(changes).forEach((key) => {
+    player[key] = changes[key]
+  });
+  await player.save();
+  return res.status(200).json(player);
 };
 
 /**
@@ -58,7 +62,8 @@ const updatePlayer = async (req, res) => {
  * @return {String}
  */
 const deletePlayer = async (req, res) => {
-  await Player.findByIdAndRemove(req.params.playerId);
+  const player = await Player.findById(req.params.playerId);
+  await player.remove();
   return res.status(200).json({ message: 'ok' });
 };
 

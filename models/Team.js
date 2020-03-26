@@ -2,7 +2,16 @@ import cuid from 'cuid';
 
 import db from '../db';
 
-const Team = db.model('Team', {
+export const TeamDocument = {
+  _id: String,
+  name: String,
+  logo: String,
+  website: String,
+  external_roster: String,
+  roster: Array
+}
+
+export const Team = db.model('Team', {
   _id: {
     type: String,
     default: cuid
@@ -18,26 +27,20 @@ const Team = db.model('Team', {
     type: String,
   },
   external_roster: String,
-  games: {
-    type: String,
-    ref: 'Game',
-    required: true,
-    index: true
-  },
+  // games: [
+  //   {
+  //     type: String,
+  //     ref: 'Game'
+  //   }
+  // ],
   roster: [
     {
       type: String,
       ref: 'Player',
-      required: true,
-      index: true
     }
   ],
-  standing: {
-    type: String,
-    ref: 'Team',
-    required: true,
-    index: true
-  }
+  // standing: {
+  //   type: String,
+  //   ref: 'Team',
+  // }
 })
-
-export default Team
