@@ -1,6 +1,6 @@
-import express from 'express'
-import { Player, PlayerDocument } from '../models/Player';
-import { autoCatch } from '../helpers/auto-catch';
+const express = require('express')
+const { Player, PlayerDocument } = require('../models/Player');
+const { autoCatch } = require('../helpers/auto-catch');
 
 /**
  * @param {express.Request} req
@@ -67,7 +67,7 @@ const deletePlayer = async (req, res) => {
   return res.status(200).json({ message: 'ok' });
 };
 
-export default autoCatch({
+module.exports =  autoCatch({
   allPlayers,
   createPlayer,
   showPlayer,

@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import jwt from "express-jwt";
-import jwksRsa from "jwks-rsa";
+const dotenv = require("dotenv");
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
 
 dotenv.config();
 
@@ -21,4 +21,4 @@ const checkJwt = jwt({
   algorithm: ["RS256"]
 });
 
-export default checkJwt
+module.exports = checkJwt

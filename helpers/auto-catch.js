@@ -1,4 +1,4 @@
-export const autoCatch = (handlers) => {
+module.exports.autoCatch = (handlers) => {
   if (typeof handlers === 'function') return auto(handlers)
 
   return Object.keys(handlers).reduce((autoHandlers, key) => {

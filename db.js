@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-mongoose.connect(
-  process.env.MONGO_URI ||
-  'mongodb://localhost/nisa-server'
-, {
-  useNewUrlParser: true,
-  useCreateIndex: true
-})
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(
+    process.env.MONGO_URI ||
+    'mongodb://localhost/nisa-server'
+  , {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
+}
 
-export default mongoose
+module.exports = mongoose

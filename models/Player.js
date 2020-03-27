@@ -1,9 +1,9 @@
-import cuid from 'cuid';
-import slugify from 'slugify'
+const cuid =  require('cuid');
+const slugify =  require('slugify');
 
-import db from '../db'
+const db =  require('../db');
 
-export const PlayerDocument = {
+const PlayerDocument = {
   _id: String,
   name: String,
   number: Number,
@@ -67,11 +67,15 @@ PlayerSchema.pre('save', async function(next) {
   this.slug = slugify(this.name.toLowerCase());
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
   const playersWithSlug = await this.constructor.find({ slug: slugRegEx })
-  console.log(playersWithSlug)
   if (playersWithSlug.length) {
     this.slug = `${this.slug}-${playersWithSlug.length + 1}`
   }
   next();
 });
 
-export const Player = db.model('Player', PlayerSchema)
+const Player = db.model('Player', PlayerSchema)
+
+module.exports = {
+  Player,
+  PlayerDocument
+}

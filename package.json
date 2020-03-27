@@ -17,11 +17,24 @@
     "slugify": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@types/jest": "^25.1.4",
+    "get-port": "^5.1.1",
+    "jest": "^25.2.3",
+    "mongodb-memory-server": "^6.5.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   },
   "scripts": {
-    "start": "node -r esm start.js",
-    "dev": "nodemon -r esm start.js"
+    "start": "node start.js",
+    "dev": "nodemon start.js",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "keywords": [],
   "author": "",

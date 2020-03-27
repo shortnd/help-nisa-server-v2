@@ -1,8 +1,8 @@
-import cuid from 'cuid';
+const cuid = require('cuid');
 
-import db from '../db';
+const db = require('../db');
 
-export const TeamDocument = {
+const TeamDocument = {
   _id: String,
   name: String,
   logo: String,
@@ -11,8 +11,8 @@ export const TeamDocument = {
   roster: Array
 }
 
-export const Team = db.model('Team', {
-  _id: {
+const TeamSchema = new db.Schema({
+    _id: {
     type: String,
     default: cuid
   },
@@ -44,3 +44,10 @@ export const Team = db.model('Team', {
   //   ref: 'Team',
   // }
 })
+
+const Team = db.model('Team', TeamSchema);
+
+module.exports = {
+  Team,
+  TeamDocument
+}

@@ -1,15 +1,16 @@
-import { Router } from 'express';
-import playersController from '../controllers/playersController';
-import checkJwt from '../middleware/checkJWT';
+const { Router } = require('express');
+const playersController = require('../controllers/playersController');
+const checkJwt = require('../middleware/checkJWT');
 
 const playerRouter = Router();
 
 playerRouter.get('/', playersController.allPlayers);
 playerRouter.get('/:playerId/', playersController.showPlayer);
-
-playerRouter.use(checkJwt)
+if (process.env.NODE_ENV !== 'test') {
+  playerRouter.use(checkJwt)
+}
 playerRouter.post('/', playersController.createPlayer);
 playerRouter.put('/:playerId/', playersController.updatePlayer);
 playerRouter.delete('/:playerId/', playersController.deletePlayer);
 
-export default playerRouter;
+module.exports = playerRouter;

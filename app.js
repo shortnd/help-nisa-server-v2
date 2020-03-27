@@ -1,11 +1,11 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+const express =  require('express');
+const cors =  require('cors');
+const bodyParser =  require('body-parser');
 
-import apiRouter from './routers/api';
-import { handleError } from './middleware/handleError'
-import { handleValidationError } from './middleware/handleValidationError';
-import { notFound } from './middleware/notFound';
+const apiRouter =  require('./routers/api');
+const { handleError } =  require('./middleware/handleError');
+const { handleValidationError } =  require('./middleware/handleValidationError');
+const { notFound } =  require('./middleware/notFound');
 
 const app = express();
 app.use(cors());
@@ -18,4 +18,4 @@ app.use(handleValidationError);
 app.use(handleError);
 app.use(notFound);
 
-export default app
+module.exports = app

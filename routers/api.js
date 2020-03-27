@@ -1,11 +1,11 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-import playerRouter from './playerRouter';
-import teamRouter from './teamsRouter'
+const playerRouter = require('./playerRouter');
+const teamRouter = require('./teamsRouter');
 
 const apiRouter = Router();
 
 apiRouter.use('/players', playerRouter);
 apiRouter.use('/teams', teamRouter);
 
-export default apiRouter;
+module.exports = apiRouter;

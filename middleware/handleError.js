@@ -1,6 +1,6 @@
-import { STATUS_CODES } from 'http'
+const { STATUS_CODES } = require('http');
 
-export const handleError = (err, req, res, next) => {
+module.exports.handleError = (err, req, res, next) => {
   if (res.headerSent) return next(err);
 
 

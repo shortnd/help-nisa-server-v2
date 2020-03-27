@@ -1,6 +1,6 @@
-import express from 'express';
-import { Team, TeamDocument } from '../models/Team';
-import { autoCatch } from '../helpers/auto-catch';
+const express = require('express');
+const { Team, TeamDocument } = require('../models/Team');
+const { autoCatch } = require('../helpers/auto-catch');
 
 /**
  *
@@ -67,7 +67,7 @@ const deleteTeam = async (req, res) => {
 }
 
 
-export default autoCatch({
+module.exports = autoCatch({
   allTeams,
   createTeam,
   showTeam,
